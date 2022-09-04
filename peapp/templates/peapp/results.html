@@ -1,0 +1,75 @@
+{% extends 'peapp\base.html' %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block nav %}
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link zoom" style="color: rgb(30, 117, 211);" href="{% url 'favourites' %}">Favourites</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link zoom" style="color: plum;" href="{% url 'my_results'%}">My Results</a>
+        </li>
+    {% endif %}
+{{ user.name }}
+    
+{% endblock %}
+
+{% block login %}
+    <div class="d-flex align-items-center">
+        <!-- Avatar -->
+        {% if user.is_authenticated %}
+            <p class="navbar-text justify-content-center" style="font-size: 20px; color:rgb(0, 0, 0); margin-right: 10px !important; margin: 0; ">Welcome <b>{{ user.username }}!</b></p>
+            <a href="{% url 'logout' %}">
+                <button type="button" class="btn btn-secondary btn-rounded navbar-text align-self-center" style="color: rgb(255, 255, 255);">Log Out 
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </button>
+            </a>
+        {% else %}
+            <a href="{% url 'login' %}">
+                <button type="button" class="btn btn-primary btn-rounded" style="margin-right: 10px;">Sign In</button>
+            </a>
+            <a href="{% url 'register' %}">
+                <button type="button" class="btn btn-secondary btn-rounded">Register</button>
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="content" style="text-align: center; margin-top: 10%;">
+    <h1>{{topic.name}} exam</h1>
+    <br>
+    <br>
+    <h1>
+        Your score:
+        {% if correct >= wrong %}
+            <b style="color: green;">{{correct}}/{{total}}</b></h1><h1><i class="fa fa-check" aria-hidden="true"></i>
+        {% else %}
+            <b style="color: red;">{{correct}}/{{total}}</b></h1><h1><i class="fa fa-times" aria-hidden="true"></i>
+
+        {% endif %}
+    </h1>
+    <br>
+    <br>
+    <h5>You can <b style="color: gray;">return back to the topic</b> or <b style="color: plum;">retake the exam</b></h5>
+    <div class="row justify-content-center" style="margin-top: 3%;">
+        <div class="col-4">
+            <a href="{% url 'topic' topic.id %}">
+                <button class="zoom" name='favourite' type="button" style="cursor: pointer; background-color: gray; border-color: transparent; border-radius: 15px; color: rgb(255, 255, 255); padding: 10px; font-size: 20px;">
+                    <b>Return to topic</b>
+                </button>
+            </a>
+        </div>
+        <div class="col-4">
+            <a href="{% url 'exam' topic.id %}">
+                <button class="zoom" name='favourite' type="button" style="cursor: pointer; background-color: plum; border-color: transparent; border-radius: 15px; color: rgb(255, 255, 255); padding: 10px; font-size: 20px;">
+                    <b>Retake exam</b>
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

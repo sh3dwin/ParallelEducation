@@ -1,0 +1,39 @@
+.zoom {
+    transition: transform .2s; /* Animation */
+  }
+  
+  .zoom:hover {
+    transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+  .zoom:hover i {
+    transform: scale(1.5) !important; /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+.nav.nav-center {
+    margin:0;
+    float:none;
+}
+
+.navbar-inner{
+    text-align:center;
+}
+
+.navbar-custom {
+  background-color: rgb(136, 136, 136);
+}
+
+.topics{
+  width: 60%;
+  margin: auto;
+}
+
+.topics a{
+  color: black;
+}
+
+.content{
+  width: 60%;
+  margin: auto;
+  margin-top: 8%;
+}

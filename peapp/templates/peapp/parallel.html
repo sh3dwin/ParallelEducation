@@ -1,0 +1,41 @@
+<h2>Introduction to Parallel Computing</h2>
+<p>In this topic you will learn the foundations of parallel computing on which later topics will build upon. 
+    In this topic you will find a short description on <b>what is parallel computing</b>, a quick mention of <b>Amdahl's law</b> and what <b>types of parallel computing</b> exist in todays world. 
+    At the end of the topic you will have the option to <b style="color: plum;">test</b> you knowledge on the information given in the text.
+    You can <b style="color: rgb(30, 117, 211);">favourite this topic</b> by clicking the heart icon in the bottom right corner of the page.
+</p>
+<h3>What is parallel computing?</h3>
+<p>In the simplest sense, parallel computing is the simultaneous use of multiple compute resources to solve a computational problem. 
+    Traditionally, computer software has been written for serial computation. 
+    To solve a problem, an algorithm is constructed and implemented as a serial stream of instructions. 
+    These instructions are executed on a central processing unit on one computer. 
+    Only one instruction may execute at a time—after that instruction is finished, the next one is executed. 
+    Parallel computing, on the other hand, uses multiple processing elements simultaneously to solve a problem. 
+    This is accomplished by breaking the problem into independent parts so that each processing element can execute its part of the algorithm simultaneously with the others. 
+    The processing elements can be diverse and include resources such as a single computer with multiple processors, several networked computers, specialized hardware, or any combination of the above. 
+    Historically parallel computing was used for scientific computing and the simulation of scientific problems, particularly in the natural and engineering sciences, such as meteorology.
+    This led to the design of parallel hardware and software, as well as high performance computing. 
+    In some cases parallelism is transparent to the programmer, such as in bit-level or instruction-level parallelism, but explicitly parallel algorithms, particularly those that use concurrency, are more difficult to write than sequential ones, because concurrency introduces several new classes of potential software bugs, of which race conditions are the most common. 
+    Communication and synchronization between the different subtasks are typically some of the greatest obstacles to getting optimal parallel program performance. 
+    A theoretical upper bound on the speed-up of a single program as a result of parallelization is given by Amdahl's law. 
+</p>
+<h3>Types of parallel computing</h3>
+<h4>Multi-core computing</h5>
+<p>A multi-core processor is a processor that includes multiple processing units (called "cores") on the same chip.
+
+</p>
+<h4>Distributed computing</h5>
+<p>A distributed computer (also known as a distributed memory multiprocessor) is a distributed memory computer system in which the processing elements are connected by a network. 
+    Distributed computers are highly scalable.
+</p>
+<h4>Cluster computing</h5>
+<p>A cluster is a group of loosely coupled computers that work together closely, so that in some respects they can be regarded as a single computer. 
+    Clusters are composed of multiple standalone machines connected by a network.
+</p>
+<h4>General-purpose computing on graphics processing units (GPGPU)</h5>
+<p> <b>This is the main type of parallel computing that this website will cover</b>. General-purpose computing on graphics processing units (GPGPU) is a fairly recent trend in computer engineering research. 
+    GPUs are co-processors that have been heavily optimized for computer graphics processing. 
+    Computer graphics processing is a field dominated by data parallel operations—particularly linear algebra matrix operations. 
+    In the early days, GPGPU programs used the normal graphics APIs for executing programs. 
+    However, several new programming languages and platforms have been built to do general purpose computation on GPUs with both Nvidia and AMD releasing programming environments with CUDA and Stream SDK respectively.
+</p>

@@ -1,0 +1,70 @@
+{% extends 'peapp\base.html' %}
+
+{% block title %}
+    Favourites
+{% endblock %}
+
+{% block nav %}
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link zoom" style="color: rgb(30, 117, 211);" href="{% url 'favourites' %}">Favourites</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link zoom" style="color: plum;" href="{% url 'my_results'%}">My Results</a>
+        </li>
+    {% endif %}
+{{ user.name }}
+    
+{% endblock %}
+
+{% block login %}
+    <div class="d-flex align-items-center">
+        <!-- Avatar -->
+        {% if user.is_authenticated %}
+            <p class="navbar-text justify-content-center" style="font-size: 20px; color:rgb(0, 0, 0); margin-right: 10px !important; margin: 0; ">Welcome <b>{{ user.username }}!</b></p>
+            <a href="{% url 'logout' %}">
+                <button type="button" class="btn btn-secondary btn-rounded navbar-text align-self-center" style="color: rgb(255, 255, 255);">Log Out 
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </button>
+            </a>
+        {% else %}
+            <a href="{% url 'login' %}">
+                <button type="button" class="btn btn-primary btn-rounded" style="margin-right: 10px;">Sign In</button>
+            </a>
+            <a href="{% url 'register' %}">
+                <button type="button" class="btn btn-secondary btn-rounded">Register</button>
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="topics">
+        <div class="favourites">
+            <h1>Your favourite topics <i class="fa fa-heart" style="font-size:48px;color:rgb(30, 117, 211)"></i></h1>
+            <hr>
+            <br>
+            <div class="row justify-content-start">
+            {% load static %}
+            {% if favourites %}
+                {% for favourite in favourites %}
+                    <div class="col-4">
+                        <a href="{% url 'topic' favourite.topic.id %}" style="text-decoration: none;">
+                            <div class="card zoom" style="width: 18rem;">
+                                <div class="card-body">
+                                <h5 class="card-title" style="color: rgb(30, 117, 211);">{{ favourite.topic.name }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted" style="color: gray;">ParallelEducation</h6>
+                                <p class="card-text" style="color: rgb(30, 117, 211);">{{ favourite.topic.description }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+            <h3>You haven't favourited any topics</h3>
+            {% endif %}
+            </div>
+        </div>
+        <br>
+    </div>
+{% endblock %}

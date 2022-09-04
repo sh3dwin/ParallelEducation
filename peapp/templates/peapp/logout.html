@@ -1,0 +1,41 @@
+{% extends 'peapp\base.html' %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block nav %}
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link zoom" style="color: rgb(30, 117, 211);" href="{% url 'favourites' %}">Favourites</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link zoom" style="color: plum;" href="{% url 'my_results'%}">My Results</a>
+        </li>
+    {% endif %}
+{{ user.name }}
+    
+{% endblock %}
+
+{% block login %}
+    <div class="d-flex align-items-center">
+        <!-- Avatar -->
+        {% if user.is_authenticated %}
+            <p class="navbar-text justify-content-center" style="font-size: 20px; color:rgb(0, 0, 0); margin-right: 10px !important; margin: 0; ">Welcome <b>{{ user.username }}!</b></p>
+            <a href="{% url 'logout' %}">
+                <button type="button" class="btn btn-secondary btn-rounded navbar-text align-self-center" style="color: rgb(255, 255, 255);">Log Out 
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </button>
+            </a>
+        {% else %}
+            <button type="button" class="btn btn-primary btn-rounded">Log In</button>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="content" style="text-align: center; margin-top: 10%;">
+        <h2 style="text-align: left !important;">You have been logged out.</h2>
+        <hr>
+    </div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'peapp\base.html' %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block nav %}
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link zoom" style="color: rgb(30, 117, 211);" href="{% url 'favourites' %}">Favourites</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link zoom" style="color: plum;" href="{% url 'my_results'%}">My Results</a>
+        </li>
+    {% endif %}
+{{ user.name }}
+    
+{% endblock %}
+
+{% block login %}
+    <div class="d-flex align-items-center">
+        <!-- Avatar -->
+        {% if user.is_authenticated %}
+            <p class="navbar-text justify-content-center" style="font-size: 20px; color:rgb(0, 0, 0); margin-right: 10px !important; margin: 0; ">Welcome <b>{{ user.username }}!</b></p>
+            <a href="{% url 'logout' %}">
+                <button type="button" class="btn btn-secondary btn-rounded navbar-text align-self-center" style="color: rgb(255, 255, 255);">Log Out 
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </button>
+            </a>
+        {% else %}
+            <a href="{% url 'login' %}">
+                <button type="button" class="btn btn-primary btn-rounded" style="margin-right: 10px;">Sign In</button>
+            </a>
+            <a href="{% url 'register' %}">
+                <button type="button" class="btn btn-secondary btn-rounded">Register</button>
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="about-text" style="width: 60%; margin: auto; margin-top: 5%; padding-bottom: 10%;">
+        <div style="text-align: center;">
+            {% load static %}
+            <img
+                    src="{% static 'peapp/photos/big_logo.png' %}"
+                    height="100"
+                    alt="ParallelEducation Logo"
+                    loading="lazy"
+                    style="color: white;"
+                />
+            <h3>This website is part of a project for the Design Interaction Human Computer course at the Faculty of Computer Science and Engineering in Skopje</h3>
+            <p style="color: gray;">Created by Kiril Avramoski
+                <br>
+            kiril.avramoski@students.finki.ukim.mk</p>
+        </div>
+        <br>
+        <br>
+        <h2>FAQ</h2>
+        <h4>What can I learn on this website?</h4>
+        <p>You will be able to learn the basics of programming on GPGPU (General Purpose Graphics Processing Units) using the CUDA toolkit.</p>
+        <h4>Do I need any knowledge prerequisites?</h4>
+        <p>It is required to have basic knowledge of computer architecture and a good understanding of C-like programming languages.</p>
+        <h4>What will I get by creating an account?</h4>
+        <p>You will be able to keep track of which topics you have read, favourited and tested yourself on.</p>
+        <h4>How can I favourite a topic?</h4>
+        <p>You can <b style="color: rgb(30, 117, 211);">favourite</b> a topic by clicking the heart icon on the bottom right corner of the topic page. 
+            You can <b style="color: gray;">unfavourite</b> a topic by clicking on the same heart icon.
+            If the icon is <b style="color: gray;">gray</b>, that means you have not favourited the topic.
+            If the icon is <b style="color: rgb(30, 117, 211);">blue</b>, that means you have favourited the topic.</p>
+        <h4>Where can I see the topics I have favourited?</h4>
+        <p>Your favourite topics are visible in the <b style="color: rgb(30, 117, 211);">Favourites</b> tab at the top of the screen.</p>
+        <h4>How do I take an exam on a topic?</h4>
+        <p>You can take an exam by clicking on the <b style="color: plum;">light purple</b> button on the bottom left corner of the screen.</p>
+        <h4>Where can I see what results I have achieved on an exam for a certain topic?</h4>
+        <p>Your exam results are visible in the <b style="color: plum;">My results</b> tab at the top of the screen.</p>
+    </div>
+{% endblock %}

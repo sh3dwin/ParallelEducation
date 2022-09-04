@@ -1,0 +1,66 @@
+{% extends 'peapp\base.html' %}
+
+{% block title %}
+    {{ topic.name }}
+{% endblock %}
+
+{% block nav %}
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link zoom" style="color: rgb(30, 117, 211);" href="{% url 'favourites' %}">Favourites</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link zoom" style="color: plum;" href="{% url 'my_results' %}">My Results</a>
+        </li>
+    {% endif %}
+{{ user.name }}
+    
+{% endblock %}
+
+{% block login %}
+    <div class="d-flex align-items-center">
+        <!-- Avatar -->
+        {% if user.is_authenticated %}
+            <p class="navbar-text justify-content-center" style="font-size: 20px; color:rgb(0, 0, 0); margin-right: 10px !important; margin: 0; ">Welcome <b>{{ user.username }}!</b></p>
+            <a href="{% url 'logout' %}">
+                <button type="button" class="btn btn-secondary btn-rounded navbar-text align-self-center" style="color: rgb(255, 255, 255);">Log Out 
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </button>
+            </a>
+        {% else %}
+            <a href="{% url 'login' %}">
+                <button type="button" class="btn btn-primary btn-rounded" style="margin-right: 10px;">Sign In</button>
+            </a>
+            <a href="{% url 'register' %}">
+                <button type="button" class="btn btn-secondary btn-rounded">Register</button>
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <form method="post" action="">
+        {% csrf_token %}    
+        {% if not favourite %}
+            <button name='favourite' type="submit" style="position: fixed; bottom: 50px; right: 50px; cursor: pointer; background-color: transparent; border-color: transparent;">
+            <i class="fa fa-heart zoom" style="font-size:48px;color:gray"></i>
+            </button>
+        {% else %}
+            <button name='favourite' type="submit" style="position: fixed; bottom: 50px; right: 50px; cursor: pointer; background-color: transparent; border-color: transparent;">
+                <i class="fa fa-heart zoom" style="font-size:48px; color: rgb(30, 117, 211)"></i>
+            </button>
+        {% endif %}
+    </form>
+    <div class="topic-text" style="width: 60%; margin: auto; margin-top: 5%;">
+    {% autoescape off %}
+        {{ topic.text }}
+    {% endautoescape %}
+    </div>
+    <a href="{% url 'exam' topic.id %}">
+        <button class="zoom" name='favourite' type="button" style="position: fixed; bottom: 50px; left: 50px; cursor: pointer; background-color: plum; border-color: transparent; border-radius: 15px; color: rgb(255, 255, 255); padding: 10px; font-size: 20px;">
+            <b>Test you knowledge!</b>
+        </button>
+    </a>
+    
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'peapp\base.html' %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block nav %}
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link zoom" style="color: rgb(30, 117, 211);" href="{% url 'favourites' %}">Favourites</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link zoom" style="color: plum;" href="{% url 'my_results'%}">My Results</a>
+        </li>
+    {% endif %}
+{{ user.name }}
+    
+{% endblock %}
+
+{% block login %}
+    <div class="d-flex align-items-center">
+        <!-- Avatar -->
+        {% if user.is_authenticated %}
+            <p class="navbar-text justify-content-center" style="font-size: 20px; color:rgb(0, 0, 0); margin-right: 10px !important; margin: 0; ">Welcome <b>{{ user.username }}!</b></p>
+            <a href="{% url 'logout' %}">
+                <button type="button" class="btn btn-secondary btn-rounded navbar-text align-self-center" style="color: rgb(255, 255, 255);">Log Out 
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </button>
+            </a>
+        {% else %}
+            <a href="{% url 'login' %}">
+                <button type="button" class="btn btn-primary btn-rounded" style="margin-right: 10px;">Sign In</button>
+            </a>
+            <a href="{% url 'register' %}">
+                <button type="button" class="btn btn-secondary btn-rounded">Register</button>
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="content" style="text-align: center; margin-top: 10%;">
+    <h2 style="text-align: left !important;">You can view your best result on each topic here</h2>
+    <hr>
+    <div class="row justify-content-start">
+        {% for result in results %}
+        <a href="{% url 'topic' result.topic.id %}" style="text-decoration: none;">
+            <div class="col-4" style="margin-bottom: 2%;">
+                
+                    {% if result.passed %}
+                        <div class="card zoom" style="width: 18rem; max-height: 200px; min-height: 200px; overflow: hidden; text-overflow: ellipsis;">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: rgb(30, 117, 211);">{{ result.topic.name }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted" style="color: gray;">ParallelEducation</h6>
+                                <p class="card-text" style="color: green;">Your best score on the exam:<br>{{ result.score }} <i class="fa fa-check" aria-hidden="true"></i></p>
+                                <a href="{% url 'exam' result.topic.id %}">
+                                    <button class="zoom" name='favourite' type="button" style="cursor: pointer; background-color: plum; border-color: transparent; border-radius: 15px; color: rgb(255, 255, 255); padding: 10px; font-size: 10px;">
+                                        <b>Retake exam</b>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="card zoom" style="width: 18rem; max-height: 200px; min-height: 200px; overflow: hidden; text-overflow: ellipsis;">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: rgb(30, 117, 211);">{{ result.topic.name }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted" style="color: gray;">ParallelEducation</h6>
+                                <p class="card-text" style="color: red;">Your best score on the exam:<br>{{ result.score }} <i class="fa fa-times" aria-hidden="true"></i></p>
+                                <a href="{% url 'exam' result.topic.id %}">
+                                    <button class="zoom" name='favourite' type="button" style="cursor: pointer; background-color: plum; border-color: transparent; border-radius: 15px; color: rgb(255, 255, 255); padding: 10px; font-size: 10px;">
+                                        <b>Retake exam</b>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
